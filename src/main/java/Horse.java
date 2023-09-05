@@ -1,3 +1,5 @@
+import java.util.logging.Logger;
+
 import static java.util.Objects.isNull;
 
 public class Horse {
@@ -6,22 +8,30 @@ public class Horse {
     private final double speed;
     private double distance;
 
+    private static final Logger LOGGER = Logger.getLogger(Horse.class.getName());
     public Horse(String name, double speed, double distance) {
+
         if (isNull(name)) {
+            LOGGER.severe("[" + java.time.LocalDateTime.now() + "] ERROR Horse: Name is null");
             throw new IllegalArgumentException("Name cannot be null.");
         } else if (name.isBlank()) {
+            LOGGER.severe("[" + java.time.LocalDateTime.now() + "] ERROR Hippodrome: Name is blank");
             throw new IllegalArgumentException("Name cannot be blank.");
         }
         if (speed < 0) {
+            LOGGER.severe("[" + java.time.LocalDateTime.now() + "] ERROR Hippodrome: Speed is negative");
             throw new IllegalArgumentException("Speed cannot be negative.");
         }
         if (distance < 0) {
+            LOGGER.severe("[" + java.time.LocalDateTime.now() + "] ERROR Hippodrome: Distance is negative");
             throw new IllegalArgumentException("Distance cannot be negative.");
         }
 
         this.name = name;
         this.speed = speed;
         this.distance = distance;
+        LOGGER.fine("[" + java.time.LocalDateTime.now() + "] DEBUG Hippodrome: Создание Horse, имя " + name + " скорость "+speed+" ]");
+
     }
 
     public Horse(String name, double speed) {
